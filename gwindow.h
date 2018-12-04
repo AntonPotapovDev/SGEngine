@@ -109,7 +109,7 @@ public:
 		int minorV   // Minor version of openGL
 	);
 
-	// Destructor: free up context resources
+	// Destructor: frees up context resources
 	~GWindow();
 
 	// Setter: sets context parameters by GLFW-keys

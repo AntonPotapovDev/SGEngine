@@ -7,24 +7,24 @@
 // Enum of texture wrapping types
 enum WrappingType
 {
-	Repeat,
-	MirroredRepeat,
-	ClampToEdge,
-	ClampToBorder
+	Repeat           = GL_REPEAT,
+	MirroredRepeat   = GL_MIRRORED_REPEAT,
+	ClampToEdge      = GL_CLAMP_TO_EDGE,
+	ClampToBorder    = GL_CLAMP_TO_BORDER
 };
 
 // Enum of types of texture filters
 enum FiltrationType
 {
-	Nearest,
-	Linear,
-	NearsetMipmapNearest,
-	LinearMipmapNearest,
-	NearestMipmapLinear
+	Nearest                = GL_NEAREST,
+	Linear                 = GL_LINEAR,
+	NearestMipmapNearest   = GL_NEAREST_MIPMAP_NEAREST,
+	LinearMipmapNearest    = GL_LINEAR_MIPMAP_NEAREST,
+	NearestMipmapLinear    = GL_NEAREST_MIPMAP_LINEAR
 };
 
 /*
-    This class represents a texture object, 
+    This class represents a texture object
 	which can be used to draw models using openGL
 */
 class SGTexture
@@ -56,6 +56,16 @@ public:
 		WrappingType type
 	);
 
+	// Setter: sets the color of borders that are applied 
+	// when using "ClampToBorder" type of wrapping
+	void setBorderColor
+	(
+		float r,   // Red factor
+		float g,   // Green factor
+		float b,   // Blue factor
+		float a    // Alpha factor
+	);
+
 	// Setter: sets type of minifying texture filter 
 	void setMinFiltration
 	(
@@ -74,7 +84,7 @@ public:
 	void setTextureAsCurrent();
 
 private:
-	unsigned char* image;  // Path to image
+	unsigned char* image;  // Image resources
 	GLuint textureID;      // openGL ID of texture object
 	float* borderColor;    // Color of borders, which is seted when using 'ClampToBorder' type of wrapping
 	int width;             // Width of image
