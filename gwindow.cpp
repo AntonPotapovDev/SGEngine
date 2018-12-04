@@ -24,9 +24,16 @@ GWindow::GWindow(int width, int height, const char* name, int majorV, int minorV
 
 	glViewport(0, 0, width, height);
 	glEnable(GL_DEPTH_TEST);
+
+	clearColor = new GLfloat[4];
+	for (int i = 0; i < 4; i++)
+	{
+		clearColor[i] = 1.0f;
+	}
 }
 GWindow::~GWindow()
 {
+	delete[] clearColor;
 	glfwTerminate();
 }
 void GWindow::setParameter(int par, int newValue)
@@ -55,6 +62,13 @@ void GWindow::setCursorPosCallback(GLFWcursorposfun func)
 {
 	glfwSetCursorPosCallback(window, func);
 }
+void GWindow::setClearColor(GLfloat r, GLfloat g, GLfloat b, GLfloat a)
+{
+	clearColor[0] = r;
+	clearColor[1] = g;
+	clearColor[2] = b;
+	clearColor[3] = a;
+}
 void GWindow::pollEvents()
 {
 	glfwPollEvents();
@@ -65,6 +79,14 @@ void GWindow::pollEvents()
 void GWindow::swapBuffers()
 {
 	glfwSwapBuffers(window);
+}
+void GWindow::clear(bool needToClearDepth)
+{
+	glClearColor(clearColor[0], clearColor[1], clearColor[2], clearColor[3]);
+	if (needToClearDepth)
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	else
+		glClear(GL_COLOR_BUFFER_BIT);
 }
 GLFWwindow* GWindow::getWindow()
 {

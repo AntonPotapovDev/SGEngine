@@ -142,6 +142,15 @@ public:
 		GLFWcursorposfun func // this type requires signature: void ... (GLFWwindow*, double, double)
 	);
 
+	// Setter: sets the color that is used for clearing screen
+	void setClearColor
+	(
+		GLfloat r,  // Red factor
+		GLfloat g,  // Green factor
+		GLfloat b,  // Blue factor
+		GLfloat a   // Alpha factor
+	);
+
 	// Checks for events, this method should be called 
 	// at the beginning of each pass of the 'Game' cycle 
 	void pollEvents();
@@ -149,6 +158,12 @@ public:
 	// Swaps screen buffer with back bufeer to update image, this method should be called
 	// at the end of each pass of the 'Game' cycle
 	void swapBuffers();
+
+	// Clears screen, optionally clears depth buffer
+	void clear
+	(
+		bool needToClearDepth
+	);
 
 	// Getter: returns pointer to the GLFW-window-object
 	GLFWwindow* getWindow();
@@ -179,6 +194,7 @@ private:
 	GLfloat currentFrame; // The time when the current frame has been started to draw
 	GLfloat lastFrame;    // The 'currentFrame' of previous frame
 	GLfloat deltaTime;    // The time that was took to draw previous frame
+	GLfloat* clearColor;  // The color that is used for clearing screen
 };
 
 #endif 
