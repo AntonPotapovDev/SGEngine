@@ -83,6 +83,9 @@ public:
 	// (if current shader program can get 'sampler2D' as a uniform)
 	void setTextureAsCurrent();
 
+	// Setter: disactivates current texture
+	static void resetCurrentTexture();
+
 private:
 	unsigned char* image;  // Image resources
 	GLuint textureID;      // openGL ID of texture object
