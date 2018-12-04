@@ -162,7 +162,7 @@ public:
 	// Getter: returns the boolean value: 
 	// true - context has got the command to close current window 
 	// fales - closing current window is not required
-	bool windowShouldClose();
+	bool shouldClose();
 
 private:
 	GLFWwindow* window;

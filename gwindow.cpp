@@ -71,7 +71,7 @@ int GWindow::getHeight()
 {
 	return screenHeight;
 }
-bool GWindow::windowShouldClose()
+bool GWindow::shouldClose()
 {
 	return glfwWindowShouldClose(window);
 }
