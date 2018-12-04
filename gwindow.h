@@ -153,6 +153,13 @@ public:
 	// Getter: returns pointer to the GLFW-window-object
 	GLFWwindow* getWindow();
 
+	// Getter: returns time that was took to draw last frame
+	// It doesn't work correctly if pollEvents() is used incorrectly
+	GLfloat getDeltaTime();
+
+	// Getter: returns current time
+	GLfloat getTime();
+
 	// Getter: returns screen width
 	int getWidth();
 
@@ -165,9 +172,13 @@ public:
 	bool shouldClose();
 
 private:
-	GLFWwindow* window;
+	GLFWwindow* window; // GLFW-window-object
 	int screenWidth;
 	int screenHeight;
+
+	GLfloat currentFrame; // The time when the current frame has been started to draw
+	GLfloat lastFrame;    // 'currentFrame' of previous frame
+	GLfloat deltaTime;    // The time that was took to draw previous frame
 };
 
 #endif 

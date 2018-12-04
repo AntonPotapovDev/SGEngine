@@ -3,6 +3,10 @@
 
 GWindow::GWindow(int width, int height, const char* name, int majorV, int minorV)
 {
+	currentFrame = 0.0f;
+	lastFrame = 0.0f;
+	deltaTime = 0.0f;
+
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, majorV);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minorV);
@@ -54,6 +58,9 @@ void GWindow::setCursorPosCallback(GLFWcursorposfun func)
 void GWindow::pollEvents()
 {
 	glfwPollEvents();
+	currentFrame = glfwGetTime();
+	deltaTime = currentFrame - lastFrame;
+	lastFrame = currentFrame;
 }
 void GWindow::swapBuffers()
 {
@@ -62,6 +69,14 @@ void GWindow::swapBuffers()
 GLFWwindow* GWindow::getWindow()
 {
 	return window;
+}
+GLfloat GWindow::getDeltaTime()
+{
+	return deltaTime;
+}
+GLfloat GWindow::getTime()
+{
+	return glfwGetTime();
 }
 int GWindow::getWidth()
 {
