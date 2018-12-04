@@ -5,7 +5,7 @@
 #include "context\glew.h"
 #include "context\glfw3.h"
 
-// Simple list for context parametrs
+// Simple list for store context parametrs
 // It isn't used in this patch 
 #pragma region Source
 class GWPnode
@@ -99,23 +99,73 @@ private:
 class GWindow
 {
 public:
-	GWindow(int width, int height, const char* name, int majorV, int minorV);
+	// Constructor: sets screen sizes, screen name and context parametrs
+	GWindow
+	(
+		int width, 
+		int height, 
+		const char* name, 
+		int majorV,  // Major version of openGL
+		int minorV   // Minor version of openGL
+	);
+
+	// Destructor: free up context resources
 	~GWindow();
-	void setParameter(int par, int newValue);
-	void setResizable(bool resizable);
+
+	// Setter: sets context parameters by GLFW-keys
+	void setParameter
+	(
+		int par,      // GLFW-key
+		int newValue  // New parameter value
+	);
+
+	// Setter: sets window resizable
+	void setResizable
+	(
+		bool resizable
+	);
+
+	// Setter: sets cursor enable
 	void setCursorEnable(bool enabled);
-	void setKeyCallback(GLFWkeyfun func);
-	void setCursorPosCallback(GLFWcursorposfun func);
+
+	// Setter: sets the function that the context 
+	// will use to handle key pressing
+	void setKeyCallback
+	(
+		GLFWkeyfun func // this type requires signature: void ... (GLFWwindow*, int, int, int, int)
+	);
+
+	// Setter: sets the function that the context
+	// will use to handle the mouse movement
+	void setCursorPosCallback
+	(
+		GLFWcursorposfun func // this type requires signature: void ... (GLFWwindow*, double, double)
+	);
+
+	// Checks for events, this method should be called 
+	// at the beginning of each pass of the 'Game' cycle 
 	void pollEvents();
+
+	// Swaps screen buffer with back bufeer to update image, this method should be called
+	// at the end of each pass of the 'Game' cycle
 	void swapBuffers();
+
+	// Getter: returns pointer to the GLFW-window-object
 	GLFWwindow* getWindow();
+
+	// Getter: returns screen width
 	int getWidth();
+
+	// Getter: returns screen height
 	int getHeight();
+
+	// Getter: returns the boolean value: 
+	// true - context has got the command to close current window 
+	// fales - closing current window is not required
 	bool windowShouldClose();
 
 private:
 	GLFWwindow* window;
-	//GWPlist parametrs;
 	int screenWidth;
 	int screenHeight;
 };
