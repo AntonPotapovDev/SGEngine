@@ -5,7 +5,7 @@
 #include "context\glew.h"
 #include "context\glfw3.h"
 
-// Simple list for store context parametrs
+// Simple list for storing context parametrs
 // It isn't used in this patch 
 #pragma region Source
 class GWPnode
@@ -177,7 +177,7 @@ private:
 	int screenHeight;
 
 	GLfloat currentFrame; // The time when the current frame has been started to draw
-	GLfloat lastFrame;    // 'currentFrame' of previous frame
+	GLfloat lastFrame;    // The 'currentFrame' of previous frame
 	GLfloat deltaTime;    // The time that was took to draw previous frame
 };
 
