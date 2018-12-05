@@ -21,7 +21,7 @@ public:
 	SGModel
 	(
 		const char* path,      // Path to file
-		SGTexture newTexture
+		SGTexture* newTexture
 	);
 
 	// Constructor: fills the vertex coordinates array 
@@ -30,15 +30,16 @@ public:
 	(
 		GLfloat* newCoords,    // Pointer to vertex coordinates array
 		int length,            // Length of vertex coordinates array
-		SGTexture newTexture
+		SGTexture* newTexture
 	);
 
-	// Destructor: frees up model resources
-	~SGModel();
+	// Destruction method: frees up model resources
+	void free();
 
 	// Setter: sets the order in which openGL will draw vertices
 	// (loads array of indices to IBO)
 	// (it necessary to be set only if you want to use 'drawWithIBO()')
+	// (calling this method more than one time is not recomended)
 	void setOrderOfVertices
 	(
 		int* order   // Order of vertices
@@ -71,10 +72,10 @@ public:
 private:
 	GLfloat* coords;      // 3D-Coordinates of the model
 	int countOfVertices;  // Count of 3D-Coordinates of the model
-	SGTexture texture;  // Texture of the model
-	GLuint VBO;         // Vertex buffer object
-   	GLuint VAO;         // Vertex array object
-	GLuint IBO;         // Index buffer object
+	SGTexture* texture;   // Pointer to texture of the model
+	GLuint VBO;           // Vertex buffer object
+   	GLuint VAO;           // Vertex array object
+	GLuint IBO;           // Index buffer object
 };
 
 #endif 
