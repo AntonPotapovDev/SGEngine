@@ -3,6 +3,7 @@
 
 #include "context/glew.h"
 #include "texture.h"
+#include "shader.h"
 
 /*
     This class represents a 3D model. It stores 3D coordinates and
@@ -17,20 +18,24 @@ public:
 	SGModel();
 
 	// Constructor: fills the vertex coordinates array 
-	// using data from specified file and sets new texture of the model
+	// using data from specified file, sets new texture of the model 
+	// and shader which openGL will use to draw this model
 	SGModel
 	(
 		const char* path,      // Path to file
-		SGTexture* newTexture
+		SGTexture* newTexture,
+		Shader* newShader
 	);
 
 	// Constructor: fills the vertex coordinates array 
-	// using data from specified array and sets new texture of the model
+	// using data from specified array, sets new texture of the model
+	// and shader which openGL will use to draw this model
 	SGModel
 	(
 		GLfloat* newCoords,    // Pointer to vertex coordinates array
 		int length,            // Length of vertex coordinates array
-		SGTexture* newTexture
+		SGTexture* newTexture,
+		Shader* newShader
 	);
 
 	// Destruction method: frees up model resources
@@ -51,8 +56,11 @@ public:
 	// Getter: returns count of vertices of the model
 	int getCountOfVertices();
 
-	// Getter: returns the texture of the model
-	SGTexture getTexture();
+	// Getter: returns the texture of the model (pointer)
+	SGTexture* getTexture();
+
+	// Getter: returns the shader of the model (pointer)
+	Shader* getShader();
 
 	// Getter: returns ID of vertex buffer object
 	GLuint getVBO();
@@ -66,13 +74,32 @@ public:
 	// Draws model using default order of vertices  
 	void draw();
 
+	// Draws model using default order of vertices
+	// and the texture of the model.
+	// This method takes the name of the shader uniform
+	// to transfer the texture to the shader
+	void draw
+	(
+		const char* uniformName
+	);
+
 	// Draws model using the order which is setted in IBO
 	void drawWithIBO();
+
+	// Draws model using the order which is setted in IBO
+	// and the texture of the model.
+	// This method takes the name of the shader uniform
+	// to transfer the texture to the shader
+	void drawWithIBO
+	(
+		const char* uniformName
+	);
 
 private:
 	GLfloat* coords;      // 3D-Coordinates of the model
 	int countOfVertices;  // Count of 3D-Coordinates of the model
 	SGTexture* texture;   // Pointer to texture of the model
+	Shader* shader;       // Pointer to shader of the model
 	GLuint VBO;           // Vertex buffer object
    	GLuint VAO;           // Vertex array object
 	GLuint IBO;           // Index buffer object

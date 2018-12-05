@@ -13,10 +13,11 @@ SGModel::SGModel()
 	VAO = 0;
 	IBO = 0;
 }
-SGModel::SGModel(GLfloat* newCoords, int length, SGTexture* newTexture)
+SGModel::SGModel(GLfloat* newCoords, int length, SGTexture* newTexture, Shader* newShader)
 {
 	coords = newCoords;
 	texture = newTexture;
+	shader = newShader;
 	countOfVertices = length;
 
 	try
