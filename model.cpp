@@ -7,17 +7,16 @@
 SGModel::SGModel()
 {
 	coords = NULL;
-	texture = NULL;
+	textures = NULL;
 	countOfVertices = 0;
 	VBO = 0;
 	VAO = 0;
 	IBO = 0;
 }
-SGModel::SGModel(GLfloat* newCoords, int length, SGTexture* newTexture, Shader* newShader)
+SGModel::SGModel(GLfloat* newCoords, int length, SGTexture* newTextures)
 {
 	coords = newCoords;
-	texture = newTexture;
-	shader = newShader;
+	textures = newTextures;
 	countOfVertices = length;
 
 	try
@@ -45,8 +44,8 @@ void SGModel::free()
 {
 	if (coords != NULL)
 		delete coords;
-	if (texture != NULL)
-		delete texture;
+	if (textures != NULL)
+		delete textures;
 }
 void SGModel::setOrderOfVertices(int* order)
 {
@@ -67,17 +66,5 @@ void SGModel::setOrderOfVertices(int* order)
 		throw std::exception("Error: IBO initialization failed!");
 	}
 }
-void SGModel::draw()
-{
-	try
-	{
-		glBindVertexArray(VAO);
-		glDrawArrays(GL_TRIANGLES, 0, countOfVertices);
-		glBindVertexArray(0);
-	}
-	catch (std::exception ex)
-	{
-		throw std::exception("Error: model drawing failed!");
-	}
-}
+
 
