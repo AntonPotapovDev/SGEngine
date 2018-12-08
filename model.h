@@ -19,7 +19,6 @@ public:
 
 	// Constructor: fills the vertex coordinates array 
 	// using data from specified file, sets new texture of the model 
-	// and shader which openGL will use to draw this model
 	SGModel
 	(
 		const char* path,      // Path to file
@@ -28,7 +27,6 @@ public:
 
 	// Constructor: fills the vertex coordinates array 
 	// using data from specified array, sets new texture of the model
-	// and shader which openGL will use to draw this model
 	SGModel
 	(
 		GLfloat* newCoords,    // Pointer to vertex coordinates array
@@ -45,20 +43,18 @@ public:
 	// (calling this method more than one time is not recomended)
 	void setOrderOfVertices
 	(
-		int* order   // Order of vertices
+		int* order,   // Order of vertices
+		int length    // Length of order array
 	);
 
 	// Getter: returns the pointer to the vertex array of the model
-	GLfloat getCoords();
+	GLfloat* getCoords();
 
 	// Getter: returns count of vertices of the model
 	int getCountOfVertices();
 
 	// Getter: returns the textures of the model (pointer)
-	SGTexture* getTextures();
-
-	// Getter: returns count of textures of the model
-	int getCountOfTextures();
+	SGTexture* getTexture();
 
 	// Getter: returns the list with names of uniforms
 	//SGList<const char*>* getListOfUniformNames();
@@ -75,8 +71,8 @@ public:
 private:
 	GLfloat* coords;      // 3D-Coordinates of the model
 	int countOfVertices;  // Count of 3D-Coordinates of the model
-	SGTexture* textures;   // Pointer to textures of the model
-	int countOfTextures;  // Count of textures of the model
+	SGTexture* texture;   // Pointer to texture of the model
+	//int countOfTextures;  // Count of textures of the model
 	//SGList<const char*>* listOfUniformNames  // Names of texture uniforms
 	GLuint VBO;           // Vertex buffer object
    	GLuint VAO;           // Vertex array object

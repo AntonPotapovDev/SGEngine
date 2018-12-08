@@ -7,16 +7,16 @@
 SGModel::SGModel()
 {
 	coords = NULL;
-	textures = NULL;
+	texture = NULL;
 	countOfVertices = 0;
 	VBO = 0;
 	VAO = 0;
 	IBO = 0;
 }
-SGModel::SGModel(GLfloat* newCoords, int length, SGTexture* newTextures)
+SGModel::SGModel(GLfloat* newCoords, int length, SGTexture* newTexture)
 {
 	coords = newCoords;
-	textures = newTextures;
+	texture = newTexture;
 	countOfVertices = length;
 
 	try
@@ -44,10 +44,10 @@ void SGModel::free()
 {
 	if (coords != NULL)
 		delete coords;
-	if (textures != NULL)
-		delete textures;
+	if (texture != NULL)
+		delete texture;
 }
-void SGModel::setOrderOfVertices(int* order)
+void SGModel::setOrderOfVertices(int* order, int length)
 {
 	try
 	{
@@ -56,7 +56,7 @@ void SGModel::setOrderOfVertices(int* order)
 		glBindVertexArray(VAO);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
 
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(order), order, GL_STATIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, length * sizeof(int), order, GL_STATIC_DRAW);
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
@@ -66,5 +66,28 @@ void SGModel::setOrderOfVertices(int* order)
 		throw std::exception("Error: IBO initialization failed!");
 	}
 }
-
+GLfloat* SGModel::getCoords()
+{
+	return coords;
+}
+int SGModel::getCountOfVertices()
+{
+	return countOfVertices;
+}
+SGTexture* SGModel::getTexture()
+{
+	return texture;
+}
+GLuint SGModel::getVBO()
+{
+	return VBO;
+}
+GLuint SGModel::getVAO()
+{
+	return VAO;
+}
+GLuint SGModel::getIBO()
+{
+	return IBO;
+}
 
