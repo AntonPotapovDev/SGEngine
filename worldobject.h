@@ -6,8 +6,6 @@
 #include "shader.h"
 
 #include "glm\glm.hpp"
-#include "glm\gtc\matrix_transform.hpp"
-#include "glm\gtc\type_ptr.hpp"
 
 /*
     This class represents an object in 3D graphic world.
@@ -56,9 +54,9 @@ public:
 	// Setter: sets position of world object
 	void setPosition
 	(
-		float x,   // New x position
-		float y,   // New y position
-		float z    // New z position
+		float x,
+		float y,
+		float z 
 	);
 
 	// Setter: sets rotation of world objects using angle (degrees) 
