@@ -22,7 +22,8 @@ public:
 	SGModel
 	(
 		const char* path,      // Path to file
-		SGTexture* newTextures
+		SGTexture* newTexture,
+		const char* uniformName  // The name of uniform which will be used to transfer the texture to the shader
 	);
 
 	// Constructor: fills the vertex coordinates array 
@@ -31,16 +32,21 @@ public:
 	(
 		GLfloat* newCoords,    // Pointer to vertex coordinates array
 		int length,            // Length of vertex coordinates array
-		SGTexture* newTextures
+		SGTexture* newTextures,
+		const char* uniformName  // The name of uniform which will be used to transfer the texture to the shader
 	);
 
+	// Destructor: frees up model resources
+	~SGModel();
+
 	// Destruction method: frees up model resources
+	// (using this method is recommended only if texture and coordinates is stored in the heap)
 	void free();
 
 	// Setter: sets the order in which openGL will draw vertices
 	// (loads array of indices to IBO)
 	// (it necessary to be set only if you want to use 'drawWithIBO()')
-	// (calling this method more than one time is not recomended)
+	// (calling this method more than one time is not recommended)
 	void setOrderOfVertices
 	(
 		int* order,   // Order of vertices
@@ -55,6 +61,9 @@ public:
 
 	// Getter: returns the textures of the model (pointer)
 	SGTexture* getTexture();
+
+	// Getter: returns the name of uniform which will be used to transfer the texture to the shader
+	const char* getTextureUnifromName();
 
 	// Getter: returns the list with names of uniforms
 	//SGList<const char*>* getListOfUniformNames();
@@ -72,8 +81,7 @@ private:
 	GLfloat* coords;      // 3D-Coordinates of the model
 	int countOfVertices;  // Count of 3D-Coordinates of the model
 	SGTexture* texture;   // Pointer to texture of the model
-	//int countOfTextures;  // Count of textures of the model
-	//SGList<const char*>* listOfUniformNames  // Names of texture uniforms
+	char* textureUnifromName;
 	GLuint VBO;           // Vertex buffer object
    	GLuint VAO;           // Vertex array object
 	GLuint IBO;           // Index buffer object
