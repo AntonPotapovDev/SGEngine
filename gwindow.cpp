@@ -22,7 +22,8 @@ GWindow::GWindow(int width, int height, const char* name, int majorV, int minorV
 	if (glewInit() != GLEW_OK)
 		throw std::exception("Error: getting access to openGL functions failed!");
 
-	glViewport(0, 0, width, height);
+	glfwGetFramebufferSize(window, &screenWidth, &screenHeight);
+	glViewport(0, 0, screenWidth, screenHeight);
 	glEnable(GL_DEPTH_TEST);
 
 	clearColor = new GLfloat[4];
