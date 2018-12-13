@@ -102,11 +102,14 @@ public:
 	// Constructor: sets screen sizes, screen name and context parametrs
 	GWindow
 	(
-		int width, 
-		int height, 
-		const char* name, 
-		int majorV,  // Major version of openGL
-		int minorV   // Minor version of openGL
+		int width,
+		int height,
+		const char* name,
+		int majorV,           // Major version of openGL
+		int minorV,           // Minor version of openGL
+		float newAngleOfProj,
+		float newMinViewDist,
+		float newMaxViewDist
 	);
 
 	// Destructor: frees up context resources
@@ -181,6 +184,15 @@ public:
 	// Getter: returns screen height
 	int getHeight();
 
+	// Getter: returns view angle
+	GLfloat getViewAngle();
+
+	// Getter: returns maximum view distance 
+	GLfloat getMaxViewDistance();
+
+	// Getter: returns minimum view distance
+	GLfloat getMinViewDistance();
+
 	// Getter: returns the boolean value: 
 	// true - context has got the command to close current window 
 	// fales - closing current window is not required
@@ -190,6 +202,10 @@ private:
 	GLFWwindow* window; // GLFW-window-object
 	int screenWidth;
 	int screenHeight;
+
+	GLfloat viewAngle;    // Angle of projection
+	GLfloat minViewDist;  //  
+	GLfloat maxViewDist;  // 
 
 	GLfloat currentFrame; // The time when the current frame has been started to draw
 	GLfloat lastFrame;    // The 'currentFrame' of previous frame

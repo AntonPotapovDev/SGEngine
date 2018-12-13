@@ -1,7 +1,8 @@
 #include "gwindow.h"
 #include <stdexcept>
+#include "glm\glm.hpp"
 
-GWindow::GWindow(int width, int height, const char* name, int majorV, int minorV)
+GWindow::GWindow(int width, int height, const char* name, int majorV, int minorV, float newAngleOfProj, float newMinViewDist, float newMaxViewDist)
 {
 	currentFrame = 0.0f;
 	lastFrame = 0.0f;
@@ -31,6 +32,10 @@ GWindow::GWindow(int width, int height, const char* name, int majorV, int minorV
 	{
 		clearColor[i] = 1.0f;
 	}
+
+	viewAngle = glm::radians(newAngleOfProj);
+	minViewDist = newMinViewDist;
+	maxViewDist = newMaxViewDist;
 }
 GWindow::~GWindow()
 {
@@ -100,6 +105,18 @@ GLfloat GWindow::getDeltaTime()
 GLfloat GWindow::getTime()
 {
 	return glfwGetTime();
+}
+GLfloat GWindow::getViewAngle()
+{
+	return viewAngle;
+}
+GLfloat GWindow::getMaxViewDistance()
+{
+	return maxViewDist;
+}
+GLfloat GWindow::getMinViewDistance()
+{
+	return minViewDist;
 }
 int GWindow::getWidth()
 {
