@@ -51,12 +51,30 @@ public:
 		float& z
 	);
 
-	// Setter: sets position of world object
+	// Setter: sets the position of world object
 	void setPosition
 	(
 		float x,
 		float y,
 		float z 
+	);
+
+	// Setter: sets the position of world object on axis X
+	void setPositionX
+	(
+		float x
+	);
+
+	// Setter: sets the position of world object on axis Y
+	void setPositionY
+	(
+		float y
+	);
+
+	// Setter: sets the position of world object on axis Z
+	void setPositionZ
+	(
+		float z
 	);
 
 	// Setter: sets rotation of world objects using angle (degrees) 
@@ -74,6 +92,23 @@ public:
 	(
 		float x, 
 		float y, 
+		float z
+	);
+
+	// Moves world object along specified vector 
+	void move
+	(
+		float x,  // vector.x
+		float y,  // vector.y
+		float z   // vecotr.z
+	);
+
+	// Rotates world object
+	void rotate
+	(
+		float angle,
+		float x,
+		float y,
 		float z
 	);
 

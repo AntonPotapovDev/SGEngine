@@ -31,10 +31,35 @@ void SGWorldObject::setPosition(float x, float y, float z)
 {
 	position = glm::vec3(x, y, z);
 }
+void SGWorldObject::setPositionX(float x)
+{
+	position.x = x;
+}
+void SGWorldObject::setPositionY(float y)
+{
+	position.y = y;
+}
+void SGWorldObject::setPositionZ(float z)
+{
+	position.z = z;
+}
+void SGWorldObject::move(float x, float y, float z)
+{
+	position.x = position.x + x;
+	position.y = position.y + y;
+	position.z = position.z + z;
+}
 void SGWorldObject::setRotation(float angle, float x, float y, float z)
 {
 	rotationFactors = glm::vec3(x, y, z);
-	rotationAngle = angle;
+	rotationAngle = glm::radians(angle);
+}
+void SGWorldObject::rotate(float angle, float x, float y, float z)
+{
+	rotationFactors.x = (rotationFactors.x + x) / 2;
+	rotationFactors.y = (rotationFactors.y + y) / 2;
+	rotationFactors.z = (rotationFactors.z + z) / 2;
+	rotationAngle += glm::radians(angle);
 }
 void SGWorldObject::setScale(float x, float y, float z)
 {
