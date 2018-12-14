@@ -1,6 +1,6 @@
 # SGEngine
 Simple Graphics Engine. Basic and simple object-oriented-toolkit for openGL, implementing a small part of its functionality.
-The classes of SGEngine represent such objects as winow, model, world, etc (all declarations are documented). 
+The classes of SGEngine represent such objects as window, model, world, etc (all declarations are documented). 
 This project uses GLFW, glew, SOIL and glm, so you need to add it to your project. All necessary files are added to this repository, but can work not properly on your system. It is recommended to download the GLFW and SOIL source codes and compile it yourself, then add to your project keeping original hierarchy of files.
 
 Sources:  
