@@ -1,6 +1,15 @@
 #include "worldobject.h"
 #include <stdexcept>
 
+SGWorldObject::SGWorldObject()
+{
+	model = NULL;
+	shader = NULL;
+	position = glm::vec3(0.0f, 0.0f, 0.0f);
+	scale = glm::vec3(1.0f, 1.0f, 1.0f);
+	rotationFactors = glm::vec3(0.0f, 0.0f, 0.0f);
+	rotationAngle = 0.0f;
+}
 SGWorldObject::SGWorldObject(SGModel* model, Shader* newShader)
 {
 	this->model = model;
@@ -36,6 +45,14 @@ void SGWorldObject::getScale(float& x, float& y, float& z)
 	x = scale.x;
 	y = scale.y;
 	z = scale.z;
+}
+void SGWorldObject::setModel(SGModel* model)
+{
+	this->model = model;
+}
+void SGWorldObject::setShader(Shader* shader)
+{
+	this->shader = shader;
 }
 void SGWorldObject::setPosition(float x, float y, float z)
 {

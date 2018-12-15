@@ -17,6 +17,9 @@ class SGWorldObject
 {
 public:
 
+	// Constructor: sets all pointers to NULL
+	SGWorldObject();
+
 	// Constructor: initializes SGWorld Object using a pointer to the model object
 	SGWorldObject
 	(
@@ -56,6 +59,18 @@ public:
 		float& x,
 		float& y,
 		float& z
+	);
+
+	// Setter: sets new model of this world object
+	void setModel
+	(
+		SGModel* model
+	);
+
+	// Setter: sets new shader of this world object
+	void setShader
+	(
+		Shader* shader
 	);
 
 	// Setter: sets the position of world object
